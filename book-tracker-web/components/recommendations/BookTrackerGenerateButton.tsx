@@ -31,7 +31,7 @@ export function BookTrackerGenerateButton({
   isDisabled = false,
   hasExistingRecommendations,
 }: BookTrackerGenerateButtonProps): React.JSX.Element {
-  const label = hasExistingRecommendations ? 'Refresh Recommendations' : 'Get AI Recommendations';
+  const label = hasExistingRecommendations ? 'Refresh Recommendations' : 'Get Recommendations';
 
   return (
     <Button

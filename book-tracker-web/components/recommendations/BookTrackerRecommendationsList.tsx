@@ -75,6 +75,8 @@ export function BookTrackerRecommendationsList({
               author={rec.author}
               genre={rec.genre}
               coverImageUrl={rec.coverImageUrl}
+              reason={rec.reason}
+              confidenceScore={rec.confidenceScore}
               isAdded={addedTitles.has(rec.title)}
               onViewDetails={(): void => {
                 setDetailRec(rec);

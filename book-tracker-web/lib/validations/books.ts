@@ -15,7 +15,7 @@ import { BookTrackerBookStatus } from '@/types';
 const titleGuard = z
   .string()
   .refine((txt) => txt.trim().length > 0, {
-    message: 'Title cannot be empty or whitespace-only',
+    message: 'Title is required',
   })
   .refine((txt) => txt.length <= 500, {
     message: 'Title exceeds maximum length of 500 characters',

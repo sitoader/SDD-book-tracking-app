@@ -10,7 +10,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, X, Loader2 } from 'lucide-react';
+import { X, Loader2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -23,9 +23,11 @@ interface BookTrackerRecommendationCardProps {
   author: string;
   genre?: string;
   coverImageUrl?: string;
+  reason?: string;
+  confidenceScore?: number;
   onAddToTbr: () => Promise<void>;
   onDismiss: () => void;
-  onViewDetails: () => void;
+  onViewDetails?: () => void;
   isAdded?: boolean;
 }
 
@@ -38,6 +40,8 @@ export function BookTrackerRecommendationCard({
   author,
   genre,
   coverImageUrl,
+  reason,
+  confidenceScore,
   onAddToTbr,
   onDismiss,
   onViewDetails,
@@ -111,8 +115,28 @@ export function BookTrackerRecommendationCard({
               {title}
             </h3>
             <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
-              {author}
+              By {author}
             </p>
+            {reason && (
+              <p className="mt-1 line-clamp-2 text-xs text-zinc-500 dark:text-zinc-400">
+                {reason}
+              </p>
+            )}
+            {confidenceScore !== undefined && (
+              <div
+                aria-label={`Confidence: ${confidenceScore} out of 5`}
+                className="mt-1 flex gap-0.5"
+              >
+                {Array.from({ length: 5 }, (_, i) => (
+                  <span
+                    key={i}
+                    className={`text-xs ${i < confidenceScore ? 'text-amber-400' : 'text-zinc-300'}`}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </button>
 
@@ -120,8 +144,7 @@ export function BookTrackerRecommendationCard({
         <div className="flex items-center gap-2 border-t border-zinc-100 px-3 py-2 dark:border-zinc-700">
           {isAdded ? (
             <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800">
-              <Check className="mr-1 h-3 w-3" />
-              Added
+              ✓ Added
             </Badge>
           ) : (
             <>
@@ -141,7 +164,7 @@ export function BookTrackerRecommendationCard({
                 onClick={(e): void => { e.stopPropagation(); handleDismiss(); }}
               >
                 <X className="mr-1 h-3 w-3" />
-                Dismiss
+                Not Interested
               </Button>
             </>
           )}
