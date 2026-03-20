@@ -64,9 +64,9 @@ export interface BookTrackerErrorEnvelope {
 
 /** Book reading status. */
 export enum BookTrackerBookStatus {
-  ToRead = 0,
-  Reading = 1,
-  Completed = 2,
+  ToRead = 'ToRead',
+  Reading = 'Reading',
+  Completed = 'Completed',
 }
 
 /** Book rating data. */

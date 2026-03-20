@@ -20,7 +20,7 @@ describe('apiClient', () => {
       const mockResponse = { data: 'test' };
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => mockResponse,
+        text: async () => JSON.stringify(mockResponse),
       });
 
       const result = await apiClient<{ data: string }>('/test');
@@ -41,7 +41,7 @@ describe('apiClient', () => {
       const mockResponse = { data: 'test' };
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => mockResponse,
+        text: async () => JSON.stringify(mockResponse),
       });
 
       await apiClient<{ data: string }>('/test');
@@ -61,7 +61,7 @@ describe('apiClient', () => {
       const mockResponse = { id: 1, name: 'Test User', email: 'test@example.com' };
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => mockResponse,
+        text: async () => JSON.stringify(mockResponse),
       });
 
       const result = await apiClient<{ id: number; name: string; email: string }>('/users/1');
@@ -76,7 +76,7 @@ describe('apiClient', () => {
         ok: false,
         status: 404,
         statusText: 'Not Found',
-        json: async () => ({ message: 'Resource not found' }),
+        text: async () => JSON.stringify({ message: 'Resource not found' }),
       });
 
       await expect(apiClient('/not-found')).rejects.toThrow(ApiError);
@@ -88,7 +88,7 @@ describe('apiClient', () => {
         ok: false,
         status: 400,
         statusText: 'Bad Request',
-        json: async () => errorResponse,
+        text: async () => JSON.stringify(errorResponse),
       });
 
       try {
@@ -128,7 +128,7 @@ describe('apiClient', () => {
       const mockResponse = { data: 'test' };
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => mockResponse,
+        text: async () => JSON.stringify(mockResponse),
       });
 
       await apiClient('/test', {
@@ -152,7 +152,7 @@ describe('apiClient', () => {
       const mockResponse = { data: 'test' };
       (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => mockResponse,
+        text: async () => JSON.stringify(mockResponse),
       });
 
       await apiClient('/test', {

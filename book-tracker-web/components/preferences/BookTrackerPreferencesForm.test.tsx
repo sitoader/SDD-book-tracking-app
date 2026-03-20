@@ -10,10 +10,10 @@ describe('BookTrackerPreferencesForm', () => {
 
   it('renders genre checkboxes', () => {
     render(<BookTrackerPreferencesForm {...defaultProps} />);
-    expect(screen.getByText('Fiction')).toBeInTheDocument();
-    expect(screen.getByText('Science Fiction')).toBeInTheDocument();
-    expect(screen.getByText('Fantasy')).toBeInTheDocument();
-    expect(screen.getByText('Mystery')).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: 'Fiction' })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: 'Science Fiction' })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: 'Fantasy' })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: 'Mystery' })).toBeInTheDocument();
   });
 
   it('renders theme and author inputs', () => {

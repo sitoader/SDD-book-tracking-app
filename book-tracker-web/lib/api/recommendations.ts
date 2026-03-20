@@ -39,7 +39,7 @@ export async function bookTrackerGenerateRecommendations(
 ): Promise<BookTrackerRecommendationsResponse> {
   return apiClient<BookTrackerRecommendationsResponse>(GENERATE_ENDPOINT, {
     method: 'POST',
-    body: JSON.stringify({ count: count ?? 10 }),
+    body: JSON.stringify({ count: count ?? 5 }),
   });
 }
 

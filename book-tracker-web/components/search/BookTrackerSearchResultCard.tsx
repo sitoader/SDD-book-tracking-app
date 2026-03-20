@@ -155,7 +155,7 @@ export default function BookTrackerSearchResultCard({
             ) : (
               <>
                 <BookOpen className="mr-1 h-3 w-3" />
-                To Read
+                + To Read
               </>
             )}
           </Button>
@@ -171,7 +171,7 @@ export default function BookTrackerSearchResultCard({
             ) : (
               <>
                 <BookMarked className="mr-1 h-3 w-3" />
-                Reading
+                + Reading
               </>
             )}
           </Button>

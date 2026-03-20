@@ -92,14 +92,17 @@ export default function BookTrackerRatingStars({
             onMouseEnter={(): void => handleMouseEnter(star)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="cursor-pointer transition-colors"
+            className={cn(
+              'cursor-pointer transition-colors',
+              filled ? 'text-amber-400' : 'text-zinc-300 dark:text-zinc-600',
+            )}
           >
             <Star
               className={cn(
                 sizeClasses[size],
                 'transition-all duration-200',
                 filled
-                  ? 'fill-yellow-400 text-yellow-400'
+                  ? 'fill-amber-400 text-amber-400'
                   : 'fill-none text-zinc-300 dark:text-zinc-600',
               )}
             />
@@ -110,14 +113,17 @@ export default function BookTrackerRatingStars({
             role="radio"
             aria-checked={star === value}
             aria-label={`${star} star${star !== 1 ? 's' : ''}`}
-            className="cursor-default"
+            className={cn(
+              'cursor-default',
+              filled ? 'text-amber-400' : 'text-zinc-300 dark:text-zinc-600',
+            )}
           >
             <Star
               className={cn(
                 sizeClasses[size],
                 'transition-all duration-200',
                 filled
-                  ? 'fill-yellow-400 text-yellow-400'
+                  ? 'fill-amber-400 text-amber-400'
                   : 'fill-none text-zinc-300 dark:text-zinc-600',
               )}
             />

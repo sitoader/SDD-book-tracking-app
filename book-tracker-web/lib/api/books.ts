@@ -5,15 +5,24 @@
  */
 
 import { apiClient, ApiError } from './client';
+import {
+  BookTrackerBookStatus,
+} from '@/types';
 import type {
   BookTrackerBook,
   BookTrackerBooksResponse,
   BookTrackerAddBookPayload,
   BookTrackerUpdateBookPayload,
   BookTrackerUpdateBookStatusPayload,
-  BookTrackerBookStatus,
   BookTrackerErrorEnvelope,
 } from '@/types';
+
+/** Maps string enum values to the numeric codes expected by the API. */
+const STATUS_TO_NUMBER: Record<BookTrackerBookStatus, number> = {
+  [BookTrackerBookStatus.ToRead]: 0,
+  [BookTrackerBookStatus.Reading]: 1,
+  [BookTrackerBookStatus.Completed]: 2,
+};
 
 /**
  * Fetch books from the user's library.
@@ -29,7 +38,7 @@ export async function bookTrackerGetBooks(
 ): Promise<BookTrackerBooksResponse> {
   const params = new URLSearchParams();
   if (status !== undefined) {
-    params.append('status', status.toString());
+    params.append('status', STATUS_TO_NUMBER[status].toString());
   }
   params.append('page', page.toString());
   params.append('pageSize', pageSize.toString());
